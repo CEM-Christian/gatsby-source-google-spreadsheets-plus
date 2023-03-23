@@ -20,7 +20,7 @@ any Google Sheets worksheet into a GraphQL type for build-time consumption.
 ## Install
 
 ```sh
-yarn add gatsby-source-google-spreadsheets
+yarn add gatsby-source-google-spreadsheets-plus
 ```
 
 ## Usage
