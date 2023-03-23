@@ -1,0 +1,30 @@
+---
+name: Test PR
+on:
+  pull_request:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - run: yarn
+      - run: yarn build
+      - run: yarn test
+        env:
+          CI: true
+          CLIENT_ID: ${{ secret.CLIENT_ID }}
+          CLIENT_EMAIL: ${{ secret.CLIENT_EMAIL }}
+          GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          PRIVATE_KEY: ${{ secret.PRIVATE_KEY }}
+          PRIVATE_KEY_ID: ${{ secret.PRIVATE_KEY_ID }}
+          PROJECT_ID: ${{ secret.PROJECT_ID }}
+          SPREADSHEET_ID: "1UPOEWfYO_BpK_upTzsUyzsjO-buodyIYSuVvFhb_xc4"
