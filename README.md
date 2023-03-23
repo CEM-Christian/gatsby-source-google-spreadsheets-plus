@@ -1,4 +1,4 @@
-# Welcome to gatsby-source-google-spreadsheets 👋
+# Welcome to gatsby-source-google-spreadsheets-plus 👋
 
 [![Version](https://img.shields.io/npm/v/gatsby-source-google-spreadsheets.svg)](https://www.npmjs.com/package/gatsby-source-google-spreadsheets)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/butlerx/gatsby-source-google-spreadsheets/blob/master/LICENSE)
