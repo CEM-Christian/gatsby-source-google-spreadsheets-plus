@@ -80,7 +80,7 @@ Standard source plugin installation.
 // gatsby-config.js
 // ...
 {
-  resolve: 'gatsby-source-google-spreadsheets',
+  resolve: 'gatsby-source-google-spreadsheets-plus',
   options: {
     spreadsheetId: 'get this from the sheet url',
     apiKey: 'GOOGLE-API-KEY'
@@ -90,7 +90,7 @@ Standard source plugin installation.
 },
 // OR using environment variables
 {
-  resolve: 'gatsby-source-google-spreadsheets',
+  resolve: 'gatsby-source-google-spreadsheets-plus',
   options: {
     spreadsheetId: process.env.SPREADSHEET_ID,
     apiKey: process.env.GOOGLE_API_KEY,
