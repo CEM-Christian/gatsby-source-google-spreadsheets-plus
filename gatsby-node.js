@@ -28,31 +28,33 @@ exports.sourceNodes = async (
     };
 
     // create child nodes for each worksheet
-    sheets.worksheets.forEach((sheet) => {
-      if (Array.isArray(sheet.rows)) {
+    sheets.worksheets.forEach((worksheet) => {
+      if (Array.isArray(worksheet.rows)) {
         let sheetTypeSuffix = dataTypeSuffix;
         if (!sheetTypeSuffix) {
           sheetTypeSuffix = sheet.title.replace(/[\W_]+/g, '');
           sheetTypeSuffix = sheetTypeSuffix.charAt(0).toUpperCase() + sheetTypeSuffix.slice(1);
         }
 
+        console.log("Processing Worksheet: ", worksheet.title, " (", worksheet.id, ")");
+
         // create worksheet node
         const worksheetNode = {
-          id: sheet.id,
+          id: worksheet.id,
           parent: spreadsheetNode.id,
           children: [],
-          title: sheet.title,
+          title: worksheet.title,
           internal: {
             type: `googleSpreadsheet${sheetTypeSuffix}`,
             contentDigest: crypto
               .createHash('md5')
-              .update(JSON.stringify(sheet))
-              .digest('hex'),
-          },
+              .update(JSON.stringify(worksheet))
+              .digest('hex')
+          }
         };
 
         // create child nodes for each row in the worksheet
-        sheet.rows.forEach((row, index) => {
+        worksheet.rows.forEach((row, index) => {
           const rowNode = {
             ...row, // add row data as fields to the node
             parent: worksheetNode.id,
@@ -85,16 +87,16 @@ exports.sourceNodes = async (
       }
 
       const worksheetNode = Object.assign(sheets, {
-          parent: `googleSpreadsheet${sheetTypeSuffix}`,
-          children: [],
-          internal: {
-            type: 'googleSpreadsheet',
-            contentDigest: crypto
-              .createHash('md5')
-              .update(JSON.stringify(sheets))
-              .digest('hex'),
-          }
-        });
+        parent: `googleSpreadsheet${sheetTypeSuffix}`,
+        children: [],
+        internal: {
+          type: 'googleSpreadsheet',
+          contentDigest: crypto
+            .createHash('md5')
+            .update(JSON.stringify(sheets))
+            .digest('hex'),
+        }
+      });
 
       if (Array.isArray(data)) {
 
@@ -104,16 +106,16 @@ exports.sourceNodes = async (
 
           // Create the row node
           return createNode(Object.assign(row, {
-              parent: worksheetNode.id,
-              children: [],
-              internal: {
-                type: `googleSpreadsheet${sheetTypeSuffix}Row`,
-                contentDigest: crypto
-                  .createHash('md5')
-                  .update(JSON.stringify(row))
-                  .digest('hex'),
-              },
-            }));
+            parent: worksheetNode.id,
+            children: [],
+            internal: {
+              type: `googleSpreadsheet${sheetTypeSuffix}Row`,
+              contentDigest: crypto
+                .createHash('md5')
+                .update(JSON.stringify(row))
+                .digest('hex'),
+            },
+          }));
         });
       }
       // Finally, create the worksheet node
