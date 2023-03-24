@@ -1,6 +1,6 @@
 # Welcome to gatsby-source-google-spreadsheets-plus 👋
 
-[![Version](https://img.shields.io/npm/v/gatsby-source-google-spreadsheets.svg)](https://www.npmjs.com/package/gatsby-source-google-spreadsheets)
+<!-- [![Version](https://img.shields.io/npm/v/gatsby-source-google-spreadsheets.svg)](1.0.0) -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/butlerx/gatsby-source-google-spreadsheets/blob/master/LICENSE)
 [![file structure: destiny](https://img.shields.io/badge/file%20structure-destiny-7a49ff?style=flat)](https://github.com/benawad/destiny)
 
@@ -19,7 +19,7 @@ any Google Sheets worksheet into a GraphQL type for build-time consumption.
 ## Install
 
 ```sh
-yarn add gatsby-source-google-spreadsheets-plus
+yarn add https://github.com/CEM-Christian/gatsby-source-google-spreadsheets-plus
 ```
 
 ## Usage
