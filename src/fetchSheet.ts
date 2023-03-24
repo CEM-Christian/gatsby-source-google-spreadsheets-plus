@@ -12,7 +12,7 @@ export default async (
   spreadsheetId: string,
   credentials?: object,
   apiKey?: string,
-  nestedWorksheets?: boolean
+  nestedWorksheets?: boolean,
 ) => {
   const spreadsheet = await getSpreadsheet(spreadsheetId, credentials, apiKey);
   const sheets: { [title: string]: object }[] = await Promise.all(
@@ -36,13 +36,13 @@ export default async (
       worksheets: sheets.map(sheet => {
         return {
           sheetTitle: Object.keys(sheet)[0],
-          rows: Object.values(sheet)[0]
-        }
-      })
+          rows: Object.values(sheet)[0],
+        };
+      }),
     };
   } else {
     return Object.assign({}, ...sheets, {
-      id: hash(spreadsheetId)
+      id: hash(spreadsheetId),
     });
   }
 };

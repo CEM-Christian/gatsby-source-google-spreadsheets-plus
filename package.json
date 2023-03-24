@@ -13,8 +13,13 @@
   "keywords": [
     "gatsby",
     "gatsby-plugin",
-    "gatsby-source-plugin"
+    "gatsby-source-plugin",
+    "google sheets"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CEM-Christian/gatsby-source-google-spreadsheets-plus.git"
+  },
   "license": "MIT",
   "jest": {
     "setupFiles": [
@@ -62,5 +67,12 @@
     ],
     "write": true,
     "avoidSingleFile": true
+  },
+  "bugs": {
+    "url": "https://github.com/CEM-Christian/gatsby-source-google-spreadsheets-plus/issues"
+  },
+  "homepage": "https://github.com/CEM-Christian/gatsby-source-google-spreadsheets-plus#readme",
+  "directories": {
+    "lib": "lib"
   }
 }
