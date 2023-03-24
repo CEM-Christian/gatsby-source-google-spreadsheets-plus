@@ -76,41 +76,48 @@ exports.sourceNodes = async (
 
     createNode(spreadsheetNode);
   } else {
+    // sheets = a single worksheet
     Object.entries(sheets).forEach(([name, data]) => {
+      let sheetTypeSuffix = dataTypeSuffix;
+      if (!sheetTypeSuffix) {
+        sheetTypeSuffix = name.replace(/[\W_]+/g, '');
+        sheetTypeSuffix = sheetTypeSuffix.charAt(0).toUpperCase() + sheetTypeSuffix.slice(1);
+      }
+
+      const worksheetNode = Object.assign(sheets, {
+          parent: `googleSpreadsheet${sheetTypeSuffix}`,
+          children: [],
+          internal: {
+            type: 'googleSpreadsheet',
+            contentDigest: crypto
+              .createHash('md5')
+              .update(JSON.stringify(sheets))
+              .digest('hex'),
+          }
+        });
+
       if (Array.isArray(data)) {
-        name = dataTypeSuffix ? dataTypeSuffix : name.replace(/[\W_]+/g, '');
 
         data.forEach(row => {
-          return createNode(
-            Object.assign(row, {
-              parent: '__SOURCE__',
+          // Add each row as a child of the worksheet node
+          worksheetNode.children.push(row.id);
+
+          // Create the row node
+          return createNode(Object.assign(row, {
+              parent: worksheetNode.id,
               children: [],
               internal: {
-                type: `google${name.charAt(0).toUpperCase()}${name.slice(
-                  1,
-                )}Sheet`,
+                type: `googleSpreadsheet${sheetTypeSuffix}Row`,
                 contentDigest: crypto
                   .createHash('md5')
                   .update(JSON.stringify(row))
                   .digest('hex'),
               },
-            }),
-          );
+            }));
         });
       }
+      // Finally, create the worksheet node
+      createNode(worksheetNode);
     });
-    createNode(
-      Object.assign(sheets, {
-        parent: '__SOURCE__',
-        children: [],
-        internal: {
-          type: 'googleSheet',
-          contentDigest: crypto
-            .createHash('md5')
-            .update(JSON.stringify(sheets))
-            .digest('hex'),
-        },
-      }),
-    );
   }
 };
