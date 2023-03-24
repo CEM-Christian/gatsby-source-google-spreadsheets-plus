@@ -1,6 +1,6 @@
 # Welcome to gatsby-source-google-spreadsheets-plus 👋
 
-[![Version](https://img.shields.io/npm/v/gatsby-source-google-spreadsheets.svg)](1.0.0)
+<!-- [![Version](https://img.shields.io/npm/v/gatsby-source-google-spreadsheets.svg)](1.0.0) -->
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/butlerx/gatsby-source-google-spreadsheets/blob/master/LICENSE)
 [![file structure: destiny](https://img.shields.io/badge/file%20structure-destiny-7a49ff?style=flat)](https://github.com/benawad/destiny)
 
