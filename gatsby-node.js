@@ -78,7 +78,7 @@ exports.sourceNodes = async (
   } else {
     Object.entries(sheets).forEach(([name, data]) => {
       if (Array.isArray(data)) {
-        name = dataType ? dataType : name.replace(/[\W_]+/g, '');
+        name = dataTypeSuffix ? dataTypeSuffix : name.replace(/[\W_]+/g, '');
 
         data.forEach(row => {
           return createNode(
