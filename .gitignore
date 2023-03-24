@@ -95,4 +95,4 @@ public/
 .dynamodb/
 
 # Compiled typescript
-lib
+#lib
