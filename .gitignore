@@ -1,4 +1,7 @@
 ### Node ###
+# Project Files
+.idea
+
 # Logs
 logs
 *.log
