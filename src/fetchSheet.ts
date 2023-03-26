@@ -1,9 +1,4 @@
-import {
-  // GoogleSpreadsheet,
-  // GoogleSpreadsheetRow,
-  GoogleSpreadsheetWorksheet,
-} from 'google-spreadsheet';
-// import { ColumnTypes } from './columnTypes.d';
+import {GoogleSpreadsheetWorksheet} from 'google-spreadsheet';
 import { cleanRows } from './fetchSheet/cleanRows';
 import { getSpreadsheet } from './fetchSheet/get';
 import { hash } from './fetchSheet/hash';
@@ -34,9 +29,11 @@ export default async (
       id: hash(spreadsheetId),
       title: spreadsheet.title,
       worksheets: sheets.map(sheet => {
+        const sheetTitle = Object.keys(sheet)[0]; // First (and only) key of the object is the sheet title
         return {
-          sheetTitle: Object.keys(sheet)[0],
-          rows: Object.values(sheet)[0],
+          id: hash(spreadsheetId + '-' + sheetTitle),
+          title: sheetTitle,
+          rows: sheet[sheetTitle],
         };
       }),
     };

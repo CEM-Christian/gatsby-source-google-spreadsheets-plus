@@ -32,7 +32,7 @@ exports.sourceNodes = async (
       if (Array.isArray(worksheet.rows)) {
         let sheetTypeSuffix = dataTypeSuffix;
         if (!sheetTypeSuffix) {
-          sheetTypeSuffix = sheet.title.replace(/[\W_]+/g, '');
+          sheetTypeSuffix = worksheet.title.replace(/[\W_]+/g, '');
           sheetTypeSuffix = sheetTypeSuffix.charAt(0).toUpperCase() + sheetTypeSuffix.slice(1);
         }
 
