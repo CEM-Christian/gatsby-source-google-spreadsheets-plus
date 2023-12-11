@@ -1,4 +1,4 @@
-import {GoogleSpreadsheetWorksheet} from 'google-spreadsheet';
+import { GoogleSpreadsheetWorksheet } from 'google-spreadsheet';
 import { cleanRows } from './fetchSheet/cleanRows';
 import { getSpreadsheet } from './fetchSheet/get';
 import { hash } from './fetchSheet/hash';

@@ -3,7 +3,7 @@ const fetchSheet = require('./lib/fetchSheet.js').default;
 
 exports.sourceNodes = async (
   { actions },
-  { spreadsheetId, credentials, apiKey, nestedWorksheets, dataTypeSuffix },
+  { spreadsheetId, credentials, apiKey, nestedWorksheets, dataTypeSuffix, excludeWorksheetPrefix },
 ) => {
   const { createNode } = actions;
   console.log('Fetching Google Sheet', fetchSheet, spreadsheetId);
@@ -29,7 +29,7 @@ exports.sourceNodes = async (
 
     // create child nodes for each worksheet
     sheets.worksheets.forEach((worksheet) => {
-      if (Array.isArray(worksheet.rows)) {
+      if (Array.isArray(worksheet.rows) || (excludeWorksheetPrefix && !worksheet.title.toLowerCase().startsWith(excludeWorksheetPrefix.toLowerCase()))) {
         let sheetTypeSuffix = dataTypeSuffix;
         if (!sheetTypeSuffix) {
           sheetTypeSuffix = worksheet.title.replace(/[\W_]+/g, '');
@@ -99,7 +99,6 @@ exports.sourceNodes = async (
       });
 
       if (Array.isArray(data)) {
-
         data.forEach(row => {
           // Add each row as a child of the worksheet node
           worksheetNode.children.push(row.id);
