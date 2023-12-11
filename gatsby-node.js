@@ -29,7 +29,7 @@ exports.sourceNodes = async (
 
     // create child nodes for each worksheet
     sheets.worksheets.forEach((worksheet) => {
-      if (Array.isArray(worksheet.rows) || (excludeWorksheetPrefix && !worksheet.title.toLowerCase().startsWith(excludeWorksheetPrefix.toLowerCase()))) {
+      if (Array.isArray(worksheet.rows) && (!excludeWorksheetPrefix || (excludeWorksheetPrefix && !worksheet.title.toLowerCase().startsWith(excludeWorksheetPrefix.toLowerCase())))) {
         let sheetTypeSuffix = dataTypeSuffix;
         if (!sheetTypeSuffix) {
           sheetTypeSuffix = worksheet.title.replace(/[\W_]+/g, '');
